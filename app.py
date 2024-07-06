@@ -1,10 +1,13 @@
 import streamlit as st
 import numpy as np
-
+from PIL import Image
 
 st.title("家計診断アプリ")
 st.write("あなたの家計は貯まる家計？減る家計？")
 st.write("家計簿を出して、始めましょう！")
+image = Image.open('top.jpeg')
+resized_image = image.resize((400, 200))
+st.image(resized_image)
 
 st.write("手順")
 st.write("１．家計簿を出す")
@@ -127,15 +130,18 @@ if st.sidebar.button("総合計を表示"):
 
     if saving >= 20:
       st.write("素晴らしい。その調子！")
-      st.image = "banzai_boy.png"
+      image20 = Image.open('banzai_boy.png')
+      st.image(image20, width=300)
     elif saving >=5:
       st.write("いい感じ。理想の家計はすぐそこ！")
+      image5 = Image.open('peace.jfif')
+      st.image(image5, width=300)
     elif saving >= 0:
       st.write("ぎりぎりセーフ")
+      image0 = Image.open('safe.png')
+      st.image(image0, width=300)
     else:
       st.write("赤字！見直しが必要です！！")
-
-
-
-
+      image_red = Image.open('akaji2.png')
+      st.image(image_red, width=300)
 
