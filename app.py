@@ -13,8 +13,8 @@ st.write("手順")
 st.write("１．家計簿を出す")
 st.write("２．月を選ぶ")
 st.write("３．左側の費目別入力欄の各費目にその月の収入／支出額を入力する")
-st.write("４．毎月発生しない費目は、発生した月から１年間同額を入力する")
-st.write("　   →月額にならして計算するため（月額は自動計算）")
+st.write("４．年に一度発生する費目は、発生した月から１年間その額を入力する")
+st.write("　   →月額にならして計算するため（月額は自動計算される）")
 st.write("５．発生した全費目を入力したら、『総合計を表示』ボタンを押す")
 st.write("※各支出カテゴリーごとの合計も表示可能")
 
@@ -34,7 +34,7 @@ if st.sidebar.button("収入合計"):
   st.write(f"収入合計 : {f_allincome}円")
 
 st.sidebar.write("支出")
-st.sidebar.write("カテゴリー１：毎月発生／固定費")
+st.sidebar.write("カテゴリー１：毎月発生/固定費")
 rent = st.sidebar.number_input("住宅関連費",0)
 comm = st.sidebar.number_input("通信費",0)
 ins_m = st.sidebar.number_input("保険（月払い）",0)
@@ -45,9 +45,9 @@ others1 = st.sidebar.number_input("その他１",0)
 if st.sidebar.button("支出１合計"):
   expense1 = rent + comm + ins_m + lessons + school + subsc_m + others1
   f_expense1 = f"{expense1:,}"
-  st.write(f"支出１合計 : {f_expense1}円")
+  st.write(f"支出１[毎月発生/固定費]合計 : {f_expense1}円")
 
-st.sidebar.write("カテゴリー２：毎月発生／変動費")
+st.sidebar.write("カテゴリー２：毎月発生/変動費")
 grocery = st.sidebar.number_input("食費",0)
 cons = st.sidebar.number_input("日用消耗品費",0)
 utility = st.sidebar.number_input("水道光熱費",0)
@@ -59,9 +59,9 @@ others2 = st.sidebar.number_input("その他２",0)
 if st.sidebar.button("支出２合計"):
   expense2 = grocery + cons + utility + clothes + medical + vehicle + care + others2
   f_expense2 = f"{expense2:,}"
-  st.write(f"支出２合計:{f_expense2}円")
+  st.write(f"支出２[毎月発生/変動費]合計:{f_expense2}円")
  
-st.sidebar.write("カテゴリー３：毎年発生／固定費")
+st.sidebar.write("カテゴリー３：毎年発生/固定費")
 ins_y = st.sidebar.number_input("保険（年払い）",0)
 tax = st.sidebar.number_input("税金",0)
 NHK = st.sidebar.number_input("ＮＨＫ",0)
@@ -72,9 +72,9 @@ if st.sidebar.button("支出３合計"):
   expense3 = (ins_y + tax + NHK + subsc_y+ others3) / 12 + shaken / 24
   r_expense3 = np.round(expense3, 1)
   f_expense3 = f"{r_expense3:,}"
-  st.write(f"支出３合計:{f_expense3}円")
+  st.write(f"支出３[毎年発生/固定費]合計（月額計算）:{f_expense3}円")
 
-st.sidebar.write("カテゴリー４：不定期／変動費")
+st.sidebar.write("カテゴリー４：不定期発生/変動費")
 furniture = st.sidebar.number_input("家具・家電",0)
 leasure = st.sidebar.number_input("レジャー",0)
 hospital = st.sidebar.number_input("病気",0)
@@ -85,7 +85,7 @@ if st.sidebar.button("支出４合計"):
   expense4 = furniture + leasure + hospital + entert + grad_ent + others4
   r_expense4 = np.round(expense4, 1)
   f_expense4 = f"{r_expense4:,}"
-  st.write(f"支出４合計:{f_expense4}円")
+  st.write(f"支出４[不定期発生/変動費]合計（月額計算）:{f_expense4}円")
 
 st.write(f"{month}の家計は・・・？")
 
@@ -117,10 +117,10 @@ if st.sidebar.button("総合計を表示"):
 
     st.write(f"収入合計: {f_allincome}円")
    
-    st.write(f"支出１（毎月発生、固定費）合計: {f_expense1}円")
-    st.write(f"支出２（毎月発生、変動費）合計: {f_expense2}円")
-    st.write(f"支出３（毎年発生、固定費）合計: {f_expense3}円")
-    st.write(f"支出４（不定期発生、変動費）合計: {f_expense4}円")
+    st.write(f"支出１[毎月発生/固定費]合計: {f_expense1}円")
+    st.write(f"支出２[毎月発生/変動費]合計: {f_expense2}円")
+    st.write(f"支出３[毎年発生/固定費]合計（月額計算）: {f_expense3}円")
+    st.write(f"支出４[不定期発生/変動費]合計（月額計算）: {f_expense4}円")
     
     st.write(f"支出総合計: {f_allexpenses}円")
    
@@ -129,7 +129,7 @@ if st.sidebar.button("総合計を表示"):
 
 
     if saving >= 20:
-      st.write("素晴らしい。その調子！")
+      st.write("素晴らしい！その調子！！")
       image20 = Image.open('banzai_boy.png')
       st.image(image20, width=300)
     elif saving >=5:
